@@ -11,7 +11,6 @@ import (
 	"syscall"
 
 	"github.com/lushenle/mmchatgpt/config"
-
 	"github.com/lushenle/mmchatgpt/webhook"
 	log "github.com/sirupsen/logrus"
 )

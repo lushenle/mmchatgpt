@@ -25,7 +25,7 @@ type WebHookServer struct {
 func (s *WebHookServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	mmURL := config.GetMattermostURL()
 	mmToken := config.GetMattermostToken()
-	//botUsername := config.GetBotUsername()
+	botUsername := config.GetBotUsername()
 
 	// Parse the request body as a JSON object.
 	var data map[string]interface{}
@@ -64,10 +64,10 @@ func (s *WebHookServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Only respond to messages that mention the bot.
-	//if !strings.Contains(post.Message, "@"+botUsername) {
-	//	w.WriteHeader(http.StatusOK)
-	//	return
-	//}
+	if !strings.Contains(post.Message, "@"+botUsername) {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
 
 	// Send the message to the ChatGPT API and get the response.
 	response, err := gpt.GenerateResponse(post.Message)
