@@ -1,0 +1,5 @@
+chatgpt:
+  chatGPTAPIKey: ""
+  mattermostURL: ""
+  mattermostToken: ""
+  botUsername: ""
