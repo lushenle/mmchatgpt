@@ -23,9 +23,9 @@ RUN go build -a -installsuffix cgo -ldflags="-s -w" -o mmchatgpt main.go \
     && upx mmchatgpt
 
 # build tls
-FROM alpine-glibc:glibc-2.34 as final
+FROM frolvlad/alpine-glibc:alpine-3.17_glibc-2.34 as final
 WORKDIR /
-COPY --from=builder /workspace/tlssecretmanager .
+COPY --from=builder /workspace/mmchatgpt .
 #COPY config.yaml .
 
 ENTRYPOINT ["/mmchatgpt"]
