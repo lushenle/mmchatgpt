@@ -57,7 +57,7 @@ func main() {
 	whsrv.Server.Handler = mux
 
 	// start webhook server
-	if param.CertFile != "" && param.KeyFile != "" {
+	if whsrv.Server.TLSConfig != nil {
 		go func() {
 			if err := whsrv.Server.ListenAndServeTLS("", ""); err != nil {
 				log.Errorf("Failed to listen and serve webhook: %s", err)
