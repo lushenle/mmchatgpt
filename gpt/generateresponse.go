@@ -20,7 +20,7 @@ func GenerateResponse(message string) (string, error) {
 		Prompt:           message,
 		MaxTokens:        300,
 		Temperature:      0.7,
-		Model:            gogpt.GPT3TextDavinci003,
+		Model:            gogpt.GPT3TextDavinci003, // change to text-davinci-002-render-sha
 		PresencePenalty:  0,
 		FrequencyPenalty: 0,
 		TopP:             1,

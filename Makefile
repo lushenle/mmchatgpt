@@ -26,11 +26,11 @@ vet: ## Run go vet against code
 	go vet ./...
 
 .PHONY: build
-build: fmt vet ## Build tlssecretmanager binary
+build: fmt vet ## Build binary
 	go build -installsuffix cgo -ldflags="-s -w" -o bin/mmchatgpt main.go
 
 .PHONY: run
-run: fmt vet ## Run a tlssecretmanager from your host
+run: fmt vet ## Run a from your host
 	go run ./main.go
 
 .PHONY: docker-build

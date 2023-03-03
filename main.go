@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"crypto/tls"
+	"errors"
 	"flag"
 	"fmt"
 	"net/http"
@@ -60,13 +61,17 @@ func main() {
 	if whsrv.Server.TLSConfig != nil {
 		go func() {
 			if err := whsrv.Server.ListenAndServeTLS("", ""); err != nil {
-				log.Errorf("Failed to listen and serve webhook: %s", err)
+				if !errors.Is(err, http.ErrServerClosed) {
+					log.Errorf("Failed to listen and serve webhook: %s", err)
+				}
 			}
 		}()
 	} else {
 		go func() {
 			if err := whsrv.Server.ListenAndServe(); err != nil {
-				log.Errorf("Failed to listen and serve webhook: %s", err)
+				if !errors.Is(err, http.ErrServerClosed) {
+					log.Errorf("Failed to listen and serve webhook: %s", err)
+				}
 			}
 		}()
 	}

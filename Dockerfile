@@ -1,4 +1,4 @@
-# Build the tlssecretmanager binary
+# Build the binary
 FROM golang:1.19 as builder
 
 WORKDIR /workspace
@@ -22,7 +22,7 @@ RUN go mod download
 RUN go build -a -installsuffix cgo -ldflags="-s -w" -o mmchatgpt main.go \
     && upx mmchatgpt
 
-# build tls
+# build
 FROM frolvlad/alpine-glibc:alpine-3.17_glibc-2.34 as final
 WORKDIR /
 COPY --from=builder /workspace/mmchatgpt .
